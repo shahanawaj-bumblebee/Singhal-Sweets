@@ -1,0 +1,150 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Singhal Sweets</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Luxury Loader -->
+    <div id="luxury-loader">
+        <div class="gold-spinner"></div>
+    </div>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="logo">🍬 Singhal Sweets</div>
+
+        <ul class="nav-links" id="navLinks">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'products' %}">Products</a></li>
+            <li><a href="{% url 'contact' %}">Contact</a></li>
+            <li>
+                <a href="{% url 'cart' %}" class="cart-link">
+                    🛒 Cart
+                    <span class="cart-badge">
+                        {{ request.user.cart.cartitem_set.count|default:0 }}
+                    </span>
+                </a>
+            </li>
+        </ul>
+
+        <div class="menu-toggle" id="menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    {% block content %}{% endblock %}
+    <!-- ===== PREMIUM FOOTER START ===== -->
+    <footer class="premium-footer">
+
+        <div class="footer-top-line"></div>
+
+        <div class="footer-content">
+
+            <!-- Brand Section -->
+            <div class="footer-section brand">
+                <h2>Singhal Sweets</h2>
+                <p>
+                    Serving sweetness since 1995.
+                    We deliver fresh, premium quality sweets made with pure ingredients and love.
+                </p>
+            </div>
+
+            <!-- Contact Section -->
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p>📍 Shiamgir, Uttar Pradesh, India</p>
+                <p>📞 +91 9876543210</p>
+                <p>📧 singhalsweets@gmail.com</p>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/products/">Products</a></li>
+                    <li><a href="/contact/">Contact</a></li>
+                    <li><a href="/cart/">Cart</a></li>
+                </ul>
+            </div>
+
+            <!-- Social Media -->
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-icons">
+                    <a href="#"><i>📘</i> Facebook</a>
+                    <a href="#"><i>📸</i> Instagram</a>
+                    <a href="#"><i>💬</i> WhatsApp</a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2026 Singhal Sweets | All Rights Reserved</p>
+        </div>
+
+    </footer>
+    <!-- ===== PREMIUM FOOTER END ===== -->
+
+    <script>
+        function toggleMenu() {
+            document.getElementById("navLinks").classList.toggle("active");
+        }
+    </script>
+
+
+    <script>
+        let currentIndex = 0;
+        const slides = document.querySelector('.slides');
+        const totalSlides = document.querySelectorAll('.slide').length;
+
+        function showSlide(index) {
+            if (index >= totalSlides) currentIndex = 0;
+            else if (index < 0) currentIndex = totalSlides - 1;
+            else currentIndex = index;
+
+            slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+        }
+
+        function changeSlide(direction) {
+            showSlide(currentIndex + direction);
+        }
+
+        // Auto slide every 4 seconds
+        setInterval(() => {
+            showSlide(currentIndex + 1);
+        }, 4000);
+    </script>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/919876543210" class="whatsapp-float" target="_blank">
+
+        <img src="{% static 'images/whatsapp.png' %}" alt="WhatsApp">
+    </a>
+
+
+<script>
+window.addEventListener("load", function() {
+    const loader = document.getElementById("luxury-loader");
+    loader.style.opacity = "0";
+    loader.style.transition = "opacity 0.6s ease";
+
+    setTimeout(() => {
+        loader.style.display = "none";
+    }, 600);
+});
+</script>
+</body>
+
+</html>

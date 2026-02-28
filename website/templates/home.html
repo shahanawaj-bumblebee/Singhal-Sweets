@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- HERO SECTION -->
+<!-- AUTO SLIDER -->
+<section class="slider">
+
+    <div class="slides">
+
+        <div class="slide active">
+            <div class="slide-content">
+                <h1>Fresh & Pure Sweets</h1>
+                <p>Experience the taste of tradition</p>
+                <a href="#" class="btn-primary">Shop Now</a>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="slide-content">
+                <h1>Festival Special Offers</h1>
+                <p>Flat 20% OFF on all sweets</p>
+                <a href="#" class="btn-primary">Order Now</a>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="slide-content">
+                <h1>Fast Home Delivery</h1>
+                <p>Delivered fresh at your doorstep</p>
+                <a href="#" class="btn-primary">Explore</a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Buttons -->
+    <div class="prev" onclick="changeSlide(-1)">❮</div>
+    <div class="next" onclick="changeSlide(1)">❯</div>
+    <a href="#contact-section" class="contact-btn">Contact Us</a>
+</section>
+
+
+<!-- FEATURED PRODUCTS -->
+<section class="featured">
+    <h2>Our Special Sweets</h2>
+    <div class="product-grid">
+        {% for product in products %}
+        <div class="product-card">
+            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+            <h3>{{ product.name }}</h3>
+            <p>₹{{ product.price }}</p>
+            <a href="{% url 'add_to_cart' product.id %}" class="btn-secondary">Add to Cart</a>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+
+<!-- WHY CHOOSE US -->
+<section class="why-us">
+    <h2>Why Choose Us?</h2>
+    <div class="why-grid">
+        <div class="why-card">
+            <h3>🍬 Pure Ingredients</h3>
+            <p>We use only premium quality ingredients.</p>
+        </div>
+        <div class="why-card">
+            <h3>🚚 Fast Delivery</h3>
+            <p>Quick and safe delivery at your doorstep.</p>
+        </div>
+        <div class="why-card">
+            <h3>⭐ Trusted Since 1995</h3>
+            <p>Serving happiness for 25+ years.</p>
+        </div>
+    </div>
+</section>
+
+
+<!-- ===== CONTACT SECTION ON HOME ===== -->
+
+<section class="home-contact" id="contact-section">
+
+    <h2>Contact Us</h2>
+
+    <div class="contact-wrapper">
+
+        <!-- Contact Form -->
+        <div class="contact-form-box">
+            <form method="POST">
+                {% csrf_token %}
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <textarea placeholder="Your Message" rows="5"></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+
+        <!-- Google Map -->
+        <div class="contact-map">
+            <iframe src="https://maps.google.com/maps?q=Delhi,India&output=embed" width="100%" height="350"
+                style="border:0;" loading="lazy">
+            </iframe>
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

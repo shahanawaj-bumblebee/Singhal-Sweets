@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2 style="text-align:center; margin-top:40px;">Our Products</h2>
+
+<div class="product-grid">
+    {% for product in products %}
+    <div class="product-card">
+        <a href="{% url 'product_detail' product.id %}">
+            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+            <h3>{{ product.name }}</h3>
+            <p>₹ {{ product.price }}</p>
+        </a>
+        <a href="{% url 'add_to_cart' product.id %}" class="cart-btn">
+            Add to Cart
+        </a>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
